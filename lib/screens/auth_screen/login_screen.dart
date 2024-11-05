@@ -1,5 +1,5 @@
-import 'package:bun_app/login/register_screen.dart';
-import 'package:bun_app/main_screens/main_screen.dart';
+import 'package:bun_app/screens/auth_screen/register_screen.dart';
+import 'package:bun_app/screens/main_screens/main_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

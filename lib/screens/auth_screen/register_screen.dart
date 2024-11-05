@@ -1,4 +1,4 @@
-import 'package:bun_app/login/login_screen.dart';
+import 'package:bun_app/screens/auth_screen/login_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

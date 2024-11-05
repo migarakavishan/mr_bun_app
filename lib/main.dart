@@ -1,4 +1,4 @@
-import 'package:bun_app/main_screens/main_screen.dart';
+import 'package:bun_app/screens/splash%20_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,12 +12,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Mr.Bun',
       debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid: true,
+      // debugShowMaterialGrid: true,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MainScreen(),
+      home: const SplashScreen(),
     );
   }
 }

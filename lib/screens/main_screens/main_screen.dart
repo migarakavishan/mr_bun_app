@@ -1,7 +1,7 @@
-import 'package:bun_app/main_screens/cart/cart_scrren.dart';
-import 'package:bun_app/main_screens/favorite/favorite_screen.dart';
-import 'package:bun_app/main_screens/home_screen/home_screen.dart';
-import 'package:bun_app/main_screens/profile/profile_screen.dart';
+import 'package:bun_app/screens/cart/cart_scrren.dart';
+import 'package:bun_app/screens/favorite/favorite_screen.dart';
+import 'package:bun_app/screens/home_screen/home_screen.dart';
+import 'package:bun_app/screens/profile/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -19,8 +19,7 @@ class _MainScreenState extends State<MainScreen> {
     const FavoriteScreen(),
     const CartScrren(),
     const ProfileScreen()
-    // SearchPage(),
-    // ProfilePage(),
+    
   ];
 
   void _onItemTapped(int index) {
