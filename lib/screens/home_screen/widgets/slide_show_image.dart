@@ -1,4 +1,4 @@
-import 'package:bun_app/data/demo_data.dart';
+import 'package:bun_app/utils/demo_data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 

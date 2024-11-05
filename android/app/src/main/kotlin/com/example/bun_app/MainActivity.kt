@@ -1,4 +1,4 @@
-package com.example.bun_app
+package lk.migara.bun
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,3 +1,4 @@
+import 'package:bun_app/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -62,12 +63,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15)),
-                child: const Padding(
-                  padding: EdgeInsets.all(30.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Icon(Icons.edit, color: Color(0xff1B6BA7), size: 25),
                           SizedBox(
@@ -83,11 +84,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Color(0xff1B6BA7))
                         ],
                       ),
-                      Divider(),
-                      SizedBox(
+                      const Divider(),
+                      const SizedBox(
                         height: 30,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Icon(Icons.favorite,
                               color: Color(0xff1B6BA7), size: 25),
@@ -104,11 +105,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Color(0xff1B6BA7))
                         ],
                       ),
-                      Divider(),
-                      SizedBox(
+                      const Divider(),
+                      const SizedBox(
                         height: 30,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Icon(Icons.my_library_books,
                               color: Color(0xff1B6BA7), size: 25),
@@ -127,28 +128,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Color(0xff1B6BA7))
                         ],
                       ),
-                      Divider(),
-                      SizedBox(
+                      const Divider(),
+                      const SizedBox(
                         height: 30,
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.logout,
-                            color: Colors.red,
-                            size: 25,
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            "Logout",
-                            style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          AuthController().signOutUser();
+                        },
+                        child: const Row(
+                          children: [
+                            Icon(
+                              Icons.logout,
+                              color: Colors.red,
+                              size: 25,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              "Logout",
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
