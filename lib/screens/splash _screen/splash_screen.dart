@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'package:bun_app/screens/auth_screen/login_screen.dart';
+
+import 'package:bun_app/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,14 +10,16 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 3),
     vsync: this,
   )..repeat(reverse: true);
 
   // Use Tween to control the scale animation from 0.5 to 1.5
-  late final Animation<double> _animation = Tween<double>(begin: 0.5, end: 15).animate(
+  late final Animation<double> _animation =
+      Tween<double>(begin: 0.5, end: 15).animate(
     CurvedAnimation(
       parent: _controller,
       curve: Curves.fastOutSlowIn,
@@ -33,8 +36,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const LoginScreen()));
+      AuthController().listenAuthState(context);
     });
   }
 
