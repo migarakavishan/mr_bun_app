@@ -1,4 +1,4 @@
-package lk.migara.bun
+package lk.migara.bunapp
 
 import io.flutter.embedding.android.FlutterActivity
 

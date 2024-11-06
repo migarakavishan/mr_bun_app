@@ -14,25 +14,28 @@ class DemoData {
       id: '1',
       title: 'Classic Bun',
       description: 'A soft, fluffy bun with a classic taste.',
+      category: 'ban',
       image:
           'https://www.cobsbread.com/wp-content/uploads/2022/05/cobs-product-traditional-hamburger-bun-583x400-1.png',
-      price: '1.50',
+      price: 1.50,
     ),
     ProductModel(
       id: '2',
       title: 'Cheese Bun',
       description: 'A savory bun filled with melted cheese.',
+      category: 'ban',
       image:
           'https://www.cobsbread.com/wp-content/uploads/2018/01/cobs-product-savoury-roll-cheese-650x458.png',
-      price: '2.20',
+      price: 2.20,
     ),
     ProductModel(
       id: '3',
       title: 'Garlic Bun',
+      category: 'ban',
       description: 'A soft bun with a garlic butter flavor.',
       image:
           'https://static.vecteezy.com/system/resources/thumbnails/047/270/299/small_2x/garlic-bread-with-cheese-and-parsley-food-photography-png.png',
-      price: '2.00',
+      price: 2.00,
     ),
   ];
 

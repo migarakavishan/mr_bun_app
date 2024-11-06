@@ -41,48 +41,51 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDRxtouizZmh9NtHgroCJR3VOgeOMEgXtc',
-    appId: '1:484256591217:web:159d3038a4e6a706d3dad0',
-    messagingSenderId: '484256591217',
-    projectId: 'mr-bunapp',
-    authDomain: 'mr-bunapp.firebaseapp.com',
-    storageBucket: 'mr-bunapp.firebasestorage.app',
-    measurementId: 'G-NQ990NB3ZS',
+    apiKey: 'AIzaSyDKTOfYl5O6p7WI5R0E0ZRZEYhDlvGty9A',
+    appId: '1:483327833252:web:957360afce875a3aeda231',
+    messagingSenderId: '483327833252',
+    projectId: 'diliveryboyapp',
+    authDomain: 'diliveryboyapp.firebaseapp.com',
+    databaseURL: 'https://diliveryboyapp-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'diliveryboyapp.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBurE5Q5PDkpJXzeRJ0EAO5x8KaeLJ4ZQQ',
-    appId: '1:484256591217:android:3abd289b7d915c5fd3dad0',
-    messagingSenderId: '484256591217',
-    projectId: 'mr-bunapp',
-    storageBucket: 'mr-bunapp.firebasestorage.app',
+    apiKey: 'AIzaSyARgUqA39-bZ5kbbw0ZSRjIZ_XI0b_n1U8',
+    appId: '1:483327833252:android:73e91e333d9bd5f1eda231',
+    messagingSenderId: '483327833252',
+    projectId: 'diliveryboyapp',
+    databaseURL: 'https://diliveryboyapp-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'diliveryboyapp.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyASdw57idEysLPMfgOSybIJn1swAIS3x7k',
-    appId: '1:484256591217:ios:db4a2e1203402d96d3dad0',
-    messagingSenderId: '484256591217',
-    projectId: 'mr-bunapp',
-    storageBucket: 'mr-bunapp.firebasestorage.app',
+    apiKey: 'AIzaSyAyXcJkE6qWCVomGxlfbVoDSSx0sEii8R8',
+    appId: '1:483327833252:ios:11b9540dacc95881eda231',
+    messagingSenderId: '483327833252',
+    projectId: 'diliveryboyapp',
+    databaseURL: 'https://diliveryboyapp-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'diliveryboyapp.appspot.com',
     iosBundleId: 'com.example.bunApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyASdw57idEysLPMfgOSybIJn1swAIS3x7k',
-    appId: '1:484256591217:ios:db4a2e1203402d96d3dad0',
-    messagingSenderId: '484256591217',
-    projectId: 'mr-bunapp',
-    storageBucket: 'mr-bunapp.firebasestorage.app',
+    apiKey: 'AIzaSyAyXcJkE6qWCVomGxlfbVoDSSx0sEii8R8',
+    appId: '1:483327833252:ios:11b9540dacc95881eda231',
+    messagingSenderId: '483327833252',
+    projectId: 'diliveryboyapp',
+    databaseURL: 'https://diliveryboyapp-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'diliveryboyapp.appspot.com',
     iosBundleId: 'com.example.bunApp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDRxtouizZmh9NtHgroCJR3VOgeOMEgXtc',
-    appId: '1:484256591217:web:3d8d0e78df1eb8c8d3dad0',
-    messagingSenderId: '484256591217',
-    projectId: 'mr-bunapp',
-    authDomain: 'mr-bunapp.firebaseapp.com',
-    storageBucket: 'mr-bunapp.firebasestorage.app',
-    measurementId: 'G-HTHYXN7L78',
+    apiKey: 'AIzaSyDKTOfYl5O6p7WI5R0E0ZRZEYhDlvGty9A',
+    appId: '1:483327833252:web:8b88dddb3dd784e6eda231',
+    messagingSenderId: '483327833252',
+    projectId: 'diliveryboyapp',
+    authDomain: 'diliveryboyapp.firebaseapp.com',
+    databaseURL: 'https://diliveryboyapp-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'diliveryboyapp.appspot.com',
   );
 }
