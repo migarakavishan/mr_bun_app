@@ -1,5 +1,8 @@
 import 'package:bun_app/firebase_options.dart';
+import 'package:bun_app/providers/auth_provider.dart';
+import 'package:bun_app/providers/profile_provider.dart';
 import 'package:bun_app/providers/signin_provider.dart';
+import 'package:bun_app/providers/signup_provider.dart';
 import 'package:bun_app/screens/splash%20_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +17,16 @@ Future<void> main() async {
     providers: [
       ChangeNotifierProvider(
         create: (context) => SigninProvider(),
-      )
+      ),
+      ChangeNotifierProvider(
+        create: (context) => SignupProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => ProfileProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => AuthProvider(),
+      ),
     ],
     child: const MyApp(),
   ));
