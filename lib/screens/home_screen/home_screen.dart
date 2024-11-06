@@ -1,7 +1,9 @@
+import 'package:bun_app/providers/auth_provider.dart';
 import 'package:bun_app/screens/home_screen/widgets/product_grid.dart';
 import 'package:bun_app/screens/home_screen/widgets/search_bar_wid.dart';
 import 'package:bun_app/screens/home_screen/widgets/slide_show_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/categories.dart';
 
@@ -15,10 +17,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold(
           body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -26,34 +28,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 2),
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
                     child: Text(
-                      "Hello, Migara",
-                      style: TextStyle(
+                      "Hello, ${Provider.of<AuthProvider>(context).userModel!.name}",
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  CircleAvatar(
+                  const CircleAvatar(
                     backgroundImage: NetworkImage(
                         "https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"),
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              SearchBarWid(),
-              SizedBox(
+              const SearchBarWid(),
+              const SizedBox(
                 height: 20,
               ),
-              SlideShowImage(),
-              SizedBox(
+              const SlideShowImage(),
+              const SizedBox(
                 height: 10,
               ),
-              Categories(),
-              ProductGrid(),
+              const Categories(),
+              const ProductGrid(),
             ],
           ),
         ),
