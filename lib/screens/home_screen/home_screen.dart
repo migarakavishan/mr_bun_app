@@ -55,6 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 10,
               ),
               const Categories(),
+              const SizedBox(
+                height: 20,
+              ),
               const ProductGrid(),
             ],
           ),

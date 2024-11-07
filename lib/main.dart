@@ -1,4 +1,5 @@
 import 'package:bun_app/firebase_options.dart';
+import 'package:bun_app/providers/admin_provider.dart';
 import 'package:bun_app/providers/auth_provider.dart';
 import 'package:bun_app/providers/profile_provider.dart';
 import 'package:bun_app/providers/signin_provider.dart';
@@ -26,6 +27,9 @@ Future<void> main() async {
       ),
       ChangeNotifierProvider(
         create: (context) => AuthProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => AdminProvider(),
       ),
     ],
     child: const MyApp(),

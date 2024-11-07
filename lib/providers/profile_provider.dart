@@ -45,7 +45,7 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   Future<void> pickProfileImage(BuildContext context) async {
-    _pickedImage = await picker.pickImage(context);
+    _pickedImage = await picker.pickImage();
     notifyListeners();
   }
 }
