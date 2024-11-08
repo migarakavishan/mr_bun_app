@@ -19,7 +19,6 @@ class _MainScreenState extends State<MainScreen> {
     const FavoriteScreen(),
     const CartScrren(),
     const ProfileScreen()
-    
   ];
 
   void _onItemTapped(int index) {

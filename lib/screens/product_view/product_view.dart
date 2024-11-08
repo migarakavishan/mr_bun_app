@@ -60,12 +60,15 @@ class _ProductViewState extends State<ProductView> {
         Positioned(
           top: 180,
           left: 40,
-          child: Container(
-            width: 350,
-            height: 350,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(widget.productModel.image))),
+          child: Hero(
+            tag: widget.productModel.id,
+            child: Container(
+              width: 350,
+              height: 350,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(widget.productModel.image))),
+            ),
           ),
         ),
         Positioned(
@@ -84,11 +87,15 @@ class _ProductViewState extends State<ProductView> {
                           style: const TextStyle(
                               fontSize: 30, fontWeight: FontWeight.bold),
                         ),
+                      ],
+                    ),
+                    Row(
+                      children: [
                         Text(
                           "Rs:${widget.productModel.price.toString()}0",
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w600),
-                        )
+                        ),
                       ],
                     ),
                     const SizedBox(
