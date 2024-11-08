@@ -1,7 +1,12 @@
+import 'package:bun_app/controllers/order_controller.dart';
 import 'package:bun_app/model/cart_item_model.dart';
+import 'package:bun_app/model/order_model.dart';
 import 'package:bun_app/model/product_model.dart';
+import 'package:bun_app/model/user_model.dart';
+import 'package:bun_app/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 
 class CartProvider extends ChangeNotifier {
   int _quantity = 1;
@@ -9,7 +14,7 @@ class CartProvider extends ChangeNotifier {
 
   final List<CartItemModel> _cartItems = [];
   List<CartItemModel> get cartItems => _cartItems;
-  // OrderController orderController = OrderController();
+  OrderController orderController = OrderController();
 
   void increseQuantity() {
     _quantity++;
@@ -68,16 +73,18 @@ class CartProvider extends ChangeNotifier {
     return "$total";
   }
 
-  // Future<void> saveOrders(BuildContext context) async {
-  //   UserModel user =
-  //       Provider.of<AuthProvider>(context, listen: false).userModel!;
-  //   OrderModel model = OrderModel(
-  //       items: _cartItems,
-  //       orderID: "",
-  //       totalAmount: double.parse(calculateTotal()),
-  //       user: user);
-  //   orderController.saveOrderDetails(model);
-  // }
+  Future<void> saveOrders(BuildContext context) async {
+    UserModel user =
+        Provider.of<AuthProvider>(context, listen: false).userModel!;
+    OrderModel model = OrderModel(
+        items: _cartItems,
+        orderID: "",
+        totalAmount: double.parse(calculateTotal()),
+        user: user);
+    orderController.saveOrderDetails(model);
+
+    clearCart();
+  }
 
   void clearCart() {
     _cartItems.clear();
