@@ -2,6 +2,7 @@
 
 import 'package:bun_app/model/product_model.dart';
 import 'package:bun_app/providers/admin_provider.dart';
+import 'package:bun_app/providers/auth_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -30,8 +31,8 @@ class ProductController {
             ProductModel.fromJson(element.data() as Map<String, dynamic>);
         products.add(product);
       }
-      // Provider.of<AuthProvider>(context, listen: false)
-      //     .filterFavoriteItems(products);
+      Provider.of<AuthProvider>(context, listen: false)
+          .filterFavoriteItems(products);
       Provider.of<AdminProvider>(context, listen: false)
           .setAllProducts(products);
       return products;

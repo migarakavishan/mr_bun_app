@@ -17,10 +17,21 @@ class _CategoriesState extends State<Categories> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Top Categories",
-          style: TextStyle(
-              color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500),
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "Top Categories",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800),
+            ),
+            Text(
+              "See all",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+          ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,10 +71,6 @@ class _CategoriesState extends State<Categories> {
                   ),
                 ),
               ),
-            ),
-            const Text(
-              "See all",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
           ],
         ),

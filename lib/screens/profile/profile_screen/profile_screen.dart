@@ -1,5 +1,6 @@
 import 'package:bun_app/controllers/auth_controller.dart';
 import 'package:bun_app/providers/auth_provider.dart';
+import 'package:bun_app/providers/profile_provider.dart';
 import 'package:bun_app/screens/profile/admin_screen/admin_screen.dart';
 import 'package:bun_app/utils/custom_navigators.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Consumer<AuthProvider>(builder: (context, value, child) {
+          child: Consumer2<AuthProvider, ProfileProvider>(
+              builder: (context, value, profile, child) {
             return Column(
               children: [
                 const SizedBox(
@@ -35,43 +37,77 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundImage: NetworkImage(value.userModel!.image),
+                    GestureDetector(
+                      onTap: () {
+                        profile.pickProfileImage(context);
+                      },
+                      child: Align(
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundImage: profile.pickedImage == null
+                              ? NetworkImage(value.userModel!.image)
+                              : FileImage(profile.pickedImage!)
+                                  as ImageProvider,
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                bottom: 6,
+                                right: 6,
+                                child: CircleAvatar(
+                                  radius: 12,
+                                  backgroundColor:
+                                      Colors.black.withOpacity(0.5),
+                                  child: const Icon(
+                                    Icons.edit,
+                                    size: 15,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                Text(
-                  value.userModel!.name,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w500),
+                SizedBox(
+                  width: 150,
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    controller: profile.nameController,
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      suffixIcon: const Icon(Icons.edit),
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
-                  height: 40,
-                  width: 200,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffCAE0F0),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                      child: Text(
-                    value.userModel!.email,
-                    style: const TextStyle(
-                        color: Colors.blueGrey,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
-                  )),
-                ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff2B2A4C)),
+                    onPressed: () {
+                      profile.updateUserData(context);
+                    },
+                    child: const Text(
+                      "Update Profle",
+                      style: TextStyle(color: Colors.white),
+                    )),
                 const SizedBox(
                   height: 50,
                 ),
                 Container(
-                  height: 350,
+                  height: 300,
                   width: 400,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -81,27 +117,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Row(
-                          children: [
-                            Icon(Icons.edit,
-                                color: Color(0xff1B6BA7), size: 25),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text("Edit Profile",
-                                style: TextStyle(
-                                    color: Color(0xff1B6BA7),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500)),
-                            Spacer(),
-                            Icon(Icons.arrow_forward_ios_rounded,
-                                color: Color(0xff1B6BA7))
-                          ],
-                        ),
-                        const Divider(),
-                        const SizedBox(
-                          height: 30,
-                        ),
                         const Row(
                           children: [
                             Icon(Icons.favorite,
