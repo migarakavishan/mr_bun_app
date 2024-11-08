@@ -1,6 +1,8 @@
 import 'package:bun_app/controllers/auth_controller.dart';
 import 'package:bun_app/providers/auth_provider.dart';
 import 'package:bun_app/providers/profile_provider.dart';
+import 'package:bun_app/screens/favorite/favorite_screen.dart';
+import 'package:bun_app/screens/my_orders/my_orders.dart';
 import 'package:bun_app/screens/profile/admin_screen/admin_screen.dart';
 import 'package:bun_app/utils/custom_navigators.dart';
 import 'package:flutter/material.dart';
@@ -117,20 +119,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Row(
+                        Row(
                           children: [
-                            Icon(Icons.favorite,
+                            const Icon(Icons.favorite,
                                 color: Color(0xff1B6BA7), size: 25),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
-                            Text("Favorite",
-                                style: TextStyle(
-                                    color: Color(0xff1B6BA7),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500)),
-                            Spacer(),
-                            Icon(Icons.arrow_forward_ios_rounded,
+                            GestureDetector(
+                              onTap: () {
+                                CustomNavigators.goTo(
+                                    context, const FavoriteScreen());
+                              },
+                              child: const Text("Favorite",
+                                  style: TextStyle(
+                                      color: Color(0xff1B6BA7),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500)),
+                            ),
+                            const Spacer(),
+                            const Icon(Icons.arrow_forward_ios_rounded,
                                 color: Color(0xff1B6BA7))
                           ],
                         ),
@@ -138,24 +146,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const SizedBox(
                           height: 30,
                         ),
-                        const Row(
-                          children: [
-                            Icon(Icons.my_library_books,
-                                color: Color(0xff1B6BA7), size: 25),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              "My Orders",
-                              style: TextStyle(
-                                  color: Color(0xff1B6BA7),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            Spacer(),
-                            Icon(Icons.arrow_forward_ios_rounded,
-                                color: Color(0xff1B6BA7))
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            CustomNavigators.goTo(context, const MyOrders());
+                          },
+                          child: const Row(
+                            children: [
+                              Icon(Icons.my_library_books,
+                                  color: Color(0xff1B6BA7), size: 25),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                "My Orders",
+                                style: TextStyle(
+                                    color: Color(0xff1B6BA7),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              Spacer(),
+                              Icon(Icons.arrow_forward_ios_rounded,
+                                  color: Color(0xff1B6BA7))
+                            ],
+                          ),
                         ),
                         const Divider(),
                         const SizedBox(

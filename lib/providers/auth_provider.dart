@@ -1,4 +1,6 @@
 import 'package:bun_app/controllers/auth_controller.dart';
+import 'package:bun_app/controllers/order_controller.dart';
+import 'package:bun_app/model/order_model.dart';
 import 'package:bun_app/model/product_model.dart';
 import 'package:bun_app/model/user_model.dart';
 import 'package:bun_app/providers/profile_provider.dart';
@@ -17,6 +19,8 @@ class AuthProvider extends ChangeNotifier {
   AuthController authController = AuthController();
   List<ProductModel> _favItems = [];
   List<ProductModel> get favItems => _favItems;
+  List<OrderModel> _myOrders = [];
+  List<OrderModel> get myOrders => _myOrders;
 
   void setUser(User user) {
     _user = user;
@@ -73,8 +77,14 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void removeFromOrders(ProductModel model) {
-  //   _myOrders.remove(model);
-  //   notifyListeners();
-  // }
+  Future<List<OrderModel>> fetchMyOrders(BuildContext context) async {
+    _myOrders = await OrderController().fetchMyOrders(context);
+
+    return _myOrders;
+  }
+
+  void removeFromOrders(OrderModel model) {
+    _myOrders.remove(model);
+    notifyListeners();
+  }
 }

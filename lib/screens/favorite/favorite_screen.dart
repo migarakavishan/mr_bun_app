@@ -10,7 +10,6 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
-  // List<ProductModel> products = DemoData.productList;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
