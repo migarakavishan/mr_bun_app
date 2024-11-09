@@ -38,5 +38,30 @@ class ProductController {
       return products;
     }
   }
-  
+
+  Future<List<ProductModel>> fetchProductsByCategory(
+      String category, BuildContext context) async {
+    QuerySnapshot snapshot =
+        await products.where('category', isEqualTo: category).get();
+
+    if (snapshot.docs.isEmpty) {
+      Logger().e("No products found in the selected category");
+      return [];
+    } else {
+      List<ProductModel> categoryProducts = [];
+      for (var element in snapshot.docs) {
+        ProductModel product =
+            ProductModel.fromJson(element.data() as Map<String, dynamic>);
+        categoryProducts.add(product);
+      }
+
+      // Optionally, update providers with the fetched data if necessary
+      Provider.of<AuthProvider>(context, listen: false)
+          .filterFavoriteItems(categoryProducts);
+      Provider.of<AdminProvider>(context, listen: false)
+          .setAllProducts(categoryProducts);
+
+      return categoryProducts;
+    }
+  }
 }

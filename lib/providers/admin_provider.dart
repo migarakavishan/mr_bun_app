@@ -65,9 +65,9 @@ class AdminProvider extends ChangeNotifier {
     }
   }
 
-  void setSelectCategory(String category) {
+  void setSelectCategory(String? category, BuildContext context) {
     _selectedCategory = category;
-    notifyListeners();
+    fetchProductsByCategory(context);
   }
 
   void clearForm() {
@@ -82,5 +82,25 @@ class AdminProvider extends ChangeNotifier {
   void setAllProducts(List<ProductModel> list) {
     _allItems = list;
     notifyListeners();
+  }
+
+  Future<void> fetchProductsByCategory(BuildContext context) async {
+    List<ProductModel> products;
+    if (_selectedCategory == null) {
+      // Fetch all products if no category selected
+      products = await ProductController().fetchProducts(context);
+    } else {
+      // Fetch products based on selected category
+      products = await ProductController()
+          .fetchProductsByCategory(_selectedCategory!, context);
+    }
+    _allItems = products;
+    notifyListeners();
+  }
+
+  Future<void> fetchAllProducts(BuildContext context) async {
+    List<ProductModel> allProducts =
+        await productController.fetchProducts(context);
+    setAllProducts(allProducts);
   }
 }
