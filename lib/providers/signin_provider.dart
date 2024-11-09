@@ -12,13 +12,15 @@ class SigninProvider extends ChangeNotifier {
   TextEditingController get passwordController => _passwordController;
   TextEditingController get resetEmail => _resetEmail;
 
-  Future<void> startSignIn() async {
+  Future<void> startSignIn(context) async {
     if (_emailController.text.trim().isEmpty ||
         _passwordController.text.trim().isEmpty) {
       Logger().e("Invalid data");
     } else {
       bool isSuccess = await authController.signInWithPassword(
-          email: _emailController.text, password: _passwordController.text);
+          email: _emailController.text,
+          password: _passwordController.text,
+          context: context);
       if (isSuccess) {
         clearTextField();
       }

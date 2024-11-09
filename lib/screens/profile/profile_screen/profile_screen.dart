@@ -1,3 +1,4 @@
+import 'package:bun_app/controllers/admin_controller.dart';
 import 'package:bun_app/controllers/auth_controller.dart';
 import 'package:bun_app/providers/auth_provider.dart';
 import 'package:bun_app/providers/profile_provider.dart';
@@ -6,6 +7,7 @@ import 'package:bun_app/screens/my_orders/my_orders.dart';
 import 'package:bun_app/screens/profile/admin_screen/admin_screen.dart';
 import 'package:bun_app/utils/custom_navigators.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -21,12 +23,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color(0xffF6F6F6),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            CustomNavigators.goTo(context, const AdminScreen());
-          },
-          child: const Icon(Icons.admin_panel_settings_outlined),
-        ),
+        floatingActionButton: FutureBuilder(
+            future: AdminController().getAdmins(),
+            builder: (context, snapshot) {
+              String uid =
+                  Provider.of<AuthProvider>(context, listen: false).user!.uid;
+
+              if (snapshot.connectionState == ConnectionState.waiting) {}
+              if (snapshot.hasError) {}
+              if (snapshot.hasData) {
+                Logger().e(snapshot.data);
+              }
+              if (snapshot.hasData) {
+                return snapshot.data!.contains(uid)
+                    ? FloatingActionButton(
+                        child: const Icon(Icons.admin_panel_settings),
+                        onPressed: () {
+                          CustomNavigators.goTo(context, const AdminScreen());
+                        },
+                      )
+                    : const SizedBox();
+              }
+              return const SizedBox();
+            }),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Consumer2<AuthProvider, ProfileProvider>(

@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xffB31312)),
                             onPressed: () {
-                              value.startSignIn();
+                              value.startSignIn(context);
                             },
                             child: const Text(
                               "Login",
