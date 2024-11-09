@@ -4,6 +4,7 @@ import 'package:bun_app/model/user_model.dart';
 import 'package:bun_app/providers/auth_provider.dart' as auth_provider;
 import 'package:bun_app/screens/auth_screen/login_screen.dart';
 import 'package:bun_app/screens/main_screens/main_screen.dart';
+import 'package:bun_app/utils/custom_dialog.dart';
 import 'package:bun_app/utils/custom_navigators.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -47,17 +48,27 @@ class AuthController {
   }
 
   Future<bool> signInWithPassword(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
+      CustomDialog.dismissLoader();
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
+        CustomDialog.showDialog(context,
+            title: 'Something went wrong',
+            content: 'No user found for that email.');
         Logger().e('No user found for that email.');
       } else if (e.code == 'wrong-password') {
+        CustomDialog.showDialog(context,
+            title: 'Something went wrong',
+            content: 'Wrong password provided for that user.');
         Logger().e('Wrong password provided for that user.');
       }
+      CustomDialog.dismissLoader();
       return false;
     }
   }
@@ -65,7 +76,8 @@ class AuthController {
   Future<bool> createAccount(
       {required String email,
       required String password,
-      required String name}) async {
+      required String name,
+      required BuildContext context}) async {
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -85,8 +97,14 @@ class AuthController {
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
+        CustomDialog.showDialog(context,
+            title: 'Something went wrong',
+            content: 'The password provided is too weak.');
         Logger().e('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
+        CustomDialog.showDialog(context,
+            title: 'Something went wrong',
+            content: 'The account already exists for that email.');
         Logger().e('The account already exists for that email.');
       }
       return false;
