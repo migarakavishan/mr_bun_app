@@ -12,8 +12,12 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
+/// Controller class for handling user authentication and user data operations.
 class AuthController {
   CollectionReference users = FirebaseFirestore.instance.collection("Users");
+
+  // If the user is signed out, navigates to the LoginScreen. If the user is
+  // signed in, fetches user data and navigates to the MainScreen.
   Future<void> listenAuthState(BuildContext context) async {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
@@ -29,6 +33,7 @@ class AuthController {
                 .setUserModel(value, context, value.name);
             CustomNavigators.goTo(context, const MainScreen());
           } else {
+            // No existing user data; create a new user model with default image and empty name.
             Provider.of<auth_provider.AuthProvider>(context, listen: false)
                 .setUserModel(
                     UserModel(
@@ -47,6 +52,7 @@ class AuthController {
     });
   }
 
+  // Signs in a user with email and password.
   Future<bool> signInWithPassword(
       {required String email,
       required String password,
@@ -73,18 +79,22 @@ class AuthController {
     }
   }
 
+// Creates a new user account with email, password, and name.
   Future<bool> createAccount(
       {required String email,
       required String password,
       required String name,
       required BuildContext context}) async {
     try {
+      // Attempt to create a new user with email and password.
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
       if (credential.user != null) {
+        // User successfully created; create a UserModel and add it to Firestore.
         UserModel model = UserModel(
             name: name,
             email: email,
@@ -114,6 +124,7 @@ class AuthController {
     }
   }
 
+  // Adds a new user's data to Firestore.
   Future<void> addUserData(UserModel user) async {
     try {
       users.doc(user.uid).set(user.toJson());
@@ -124,9 +135,10 @@ class AuthController {
   }
 
   Future<void> signOutUser() async {
-    await FirebaseAuth.instance.signOut();
+    await FirebaseAuth.instance.signOut(); // Signs out the current user.
   }
 
+  // Fetches user data from Firestore by user UID.
   Future<UserModel?> fetchUserData(String uid) async {
     try {
       DocumentSnapshot snapshot = await users.doc(uid).get();
@@ -137,6 +149,7 @@ class AuthController {
     }
   }
 
+  // Updates user data in Firestore for a given UID.
   Future<void> updateUser(Map<String, dynamic> data, String uid) async {
     try {
       await users.doc(uid).update(data);
@@ -146,6 +159,7 @@ class AuthController {
     }
   }
 
+  // Updates the user's list of favorite items in Firestore.
   Future<void> updateFavorite(String uid, List<String> items) async {
     try {
       await users.doc(uid).update({"favorite": items});

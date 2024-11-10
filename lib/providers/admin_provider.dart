@@ -10,8 +10,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
+// Provider class for managing product-related operations by the admin.
 class AdminProvider extends ChangeNotifier {
   ProductController productController = ProductController();
+
+  // Text controllers for managing form inputs.
   final TextEditingController _nameController = TextEditingController();
   TextEditingController get nameController => _nameController;
 
@@ -21,23 +24,30 @@ class AdminProvider extends ChangeNotifier {
   final TextEditingController _priceController = TextEditingController();
   TextEditingController get priceController => _priceController;
 
+  // Stores the selected product category.
   String? _selectedCategory;
   String? get selectedCategory => _selectedCategory;
 
+  // Holds the selected image file.
   File? _imageFile;
   File? get imageFile => _imageFile;
 
   CollectionReference products =
       FirebaseFirestore.instance.collection("Products");
 
+  // List of all products fetched from Firebase.
   List<ProductModel> _allItems = [];
   List<ProductModel> get allItems => _allItems;
 
+  // Allows the user to pick an image from their device and updates the image file.
   Future<void> pickImage(BuildContext context) async {
     _imageFile = await FileImagePicker().pickImage();
     notifyListeners();
   }
 
+  // Adds a product to the Firestore database after validation.
+
+  // This method validates that the image file, product name, description, and price are provided before uploading the image to Firebase Storage and saving the product data to Firestore.
   Future<void> addProduct(BuildContext context) async {
     if (_imageFile != null &&
         _nameController.text.trim().isNotEmpty &&
@@ -65,11 +75,13 @@ class AdminProvider extends ChangeNotifier {
     }
   }
 
+  // Sets the selected category and fetches products filtered by that category.
   void setSelectCategory(String? category, BuildContext context) {
     _selectedCategory = category;
     fetchProductsByCategory(context);
   }
 
+  // Clears the form fields and resets the selected category and image file.
   void clearForm() {
     _descriptionController.clear();
     _nameController.clear();
@@ -79,11 +91,14 @@ class AdminProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Sets the list of all products to be displayed.
   void setAllProducts(List<ProductModel> list) {
     _allItems = list;
     notifyListeners();
   }
 
+  // Fetches products based on the selected category.
+  // If no category is selected, it fetches all products.
   Future<void> fetchProductsByCategory(BuildContext context) async {
     List<ProductModel> products;
     if (_selectedCategory == null) {
@@ -98,6 +113,7 @@ class AdminProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Fetches all products and sets them in the provider's list.
   Future<void> fetchAllProducts(BuildContext context) async {
     List<ProductModel> allProducts =
         await productController.fetchProducts(context);

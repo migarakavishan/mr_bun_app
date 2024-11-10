@@ -6,8 +6,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 
 class FileImagePicker {
+  // Instance of ImagePicker to open gallery and pick image
   ImagePicker picker = ImagePicker();
 
+  // pick an image from the gallery
   Future<File?> pickImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {

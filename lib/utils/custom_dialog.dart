@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CustomDialog {
+  // Shows a loading spinner with a black overlay
   static void showLoader() {
     EasyLoading.show(
         maskType: EasyLoadingMaskType.black,
@@ -12,6 +13,7 @@ class CustomDialog {
         ));
   }
 
+  // Dismisses the loading spinner
   static void dismissLoader() {
     EasyLoading.dismiss();
   }

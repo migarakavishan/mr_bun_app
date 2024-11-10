@@ -8,19 +8,24 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
+// CartProvider class to manage cart operations
 class CartProvider extends ChangeNotifier {
-  int _quantity = 1;
+  int _quantity = 1; // Default quantity for cart items
   int get quantity => _quantity;
 
+  // List to store cart items
   final List<CartItemModel> _cartItems = [];
   List<CartItemModel> get cartItems => _cartItems;
-  OrderController orderController = OrderController();
 
+  OrderController orderController = OrderController(); // For order processing
+
+  // Increases item quantity in the cart
   void increseQuantity() {
     _quantity++;
     notifyListeners();
   }
 
+  // Decreases item quantity but ensures it doesn't go below 1
   void decrementQuantity() {
     if (_quantity != 1) {
       _quantity--;
@@ -28,6 +33,8 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
+  // Adds a product to the cart if it’s not already there.
+  // If it is, removes it from the cart.
   void addToCart(ProductModel model) {
     if (_cartItems.any((element) => element.model.id == model.id)) {
       _cartItems.removeWhere((element) => element.model.id == model.id);
@@ -40,11 +47,13 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
+  // Increases the quantity of a cart item at a given index.
   void increaseCartItemQuantity(int index) {
     _cartItems[index].quantity++;
     notifyListeners();
   }
 
+  // Decreases the quantity of a cart item at a given index but ensures it doesn't go below 1.
   void decrementCartItemQuantity(int index) {
     if (_cartItems[index].quantity != 1) {
       _cartItems[index].quantity--;
@@ -52,6 +61,7 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
+  
   String getQuantity(ProductModel model) {
     int q = 1;
     if (_cartItems.any((element) => element.model.id == model.id)) {
@@ -65,6 +75,7 @@ class CartProvider extends ChangeNotifier {
     return "$q";
   }
 
+  // Calculates the total cost of all items in the cart.
   String calculateTotal() {
     double total = 0;
     for (var element in _cartItems) {
@@ -73,6 +84,8 @@ class CartProvider extends ChangeNotifier {
     return "$total";
   }
 
+
+  // Saves the current cart as an order and clears the cart
   Future<void> saveOrders(BuildContext context) async {
     UserModel user =
         Provider.of<AuthProvider>(context, listen: false).userModel!;
@@ -86,6 +99,7 @@ class CartProvider extends ChangeNotifier {
     clearCart();
   }
 
+  // Clears all items from the cart.
   void clearCart() {
     _cartItems.clear();
     notifyListeners();

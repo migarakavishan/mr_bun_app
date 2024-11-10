@@ -8,20 +8,29 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
+// ProfileProvider class to manage profile-related functionality
 class ProfileProvider extends ChangeNotifier {
   AuthController authController = AuthController();
-  FileImagePicker picker = FileImagePicker();
+
+  FileImagePicker picker = FileImagePicker(); // Utility for image selection
+
   StroageController storage = StroageController();
+
+   // Text controller for the user's name
   final TextEditingController _nameController = TextEditingController();
   TextEditingController get nameController => _nameController;
+
+  // File for storing selected profile image
   File? _pickedImage;
   File? get pickedImage => _pickedImage;
 
+  // Sets the username in the text controller and notifies listeners
   void setUserName(String name) {
     _nameController.text = name;
     notifyListeners();
   }
 
+  // Updates user data, including profile image upload and name change
   Future<void> updateUserData(BuildContext context) async {
     final auth = Provider.of<AuthProvider>(context, listen: false);
     if (_pickedImage != null) {
@@ -44,6 +53,7 @@ class ProfileProvider extends ChangeNotifier {
     }
   }
 
+  // Picks a profile image using the image picker utility
   Future<void> pickProfileImage(BuildContext context) async {
     _pickedImage = await picker.pickImage();
     notifyListeners();
