@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:logger/logger.dart';
 
+
+
+// Controller class for handling admin-related operations.
 class AdminController {
-  CollectionReference admin = FirebaseFirestore.instance.collection("Admin");
+  CollectionReference admin = FirebaseFirestore.instance.collection("Admin"); // Reference to the 'Admin' collection in Firestore.
 
   Future<List<String>?> getAdmins() async {
     List<String> uids = await admin.doc("admins").get().then((value) {

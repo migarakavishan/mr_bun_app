@@ -34,6 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               if (snapshot.hasData) {
                 Logger().e(snapshot.data);
               }
+              // Show admin floating action button if the current user is an admin
               if (snapshot.hasData) {
                 return snapshot.data!.contains(uid)
                     ? FloatingActionButton(

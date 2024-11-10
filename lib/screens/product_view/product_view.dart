@@ -62,11 +62,11 @@ class _ProductViewState extends State<ProductView> {
           ),
           Positioned(
             top: 180,
-            left: 40,
+            left: 70,
             child: Hero(
               tag: widget.productModel.id,
               child: Container(
-                width: 350,
+                width: 300,
                 height: 350,
                 decoration: BoxDecoration(
                     image: DecorationImage(

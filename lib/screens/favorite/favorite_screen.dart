@@ -46,15 +46,18 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         ),
                         child: Row(
                           children: [
-                            Container(
-                              width: 100,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: NetworkImage(
-                                          value.favItems[index].image))),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            value.favItems[index].image))),
+                              ),
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,

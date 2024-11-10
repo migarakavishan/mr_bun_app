@@ -68,6 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 10,
                 ),
                 TextField(
+                  obscureText: true,
                   controller: value.passwordController,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
@@ -83,6 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 10,
                 ),
                 TextField(
+                  obscureText: true,
                   controller: value.confirmPasswordController,
                   decoration: InputDecoration(
                     fillColor: Colors.white,

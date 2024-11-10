@@ -114,7 +114,7 @@ class _AdminScreenState extends State<AdminScreen> {
                             child: InkWell(
                               onTap: () {
                                 value.setSelectCategory(
-                                    DemoData.categories[index].name);
+                                    DemoData.categories[index].name, context);
                               },
                               child: Chip(
                                   backgroundColor: value.selectedCategory ==

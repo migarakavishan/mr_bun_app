@@ -1,81 +1,51 @@
-import 'package:bun_app/controllers/product_controller.dart';
-import 'package:bun_app/model/product_model.dart';
+import 'package:bun_app/providers/admin_provider.dart';
 import 'package:bun_app/providers/auth_provider.dart';
 import 'package:bun_app/screens/product_view/product_view.dart';
 import 'package:bun_app/utils/custom_navigators.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 
 class ProductGrid extends StatelessWidget {
-  const ProductGrid({super.key, r});
+  const ProductGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: ProductController().fetchProducts(context),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return const Text("Has Error");
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return GridView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 6,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 5,
-              childAspectRatio: 0.85,
-              mainAxisSpacing: 5,
-            ),
-            itemBuilder: (context, index) {
-              return Shimmer.fromColors(
-                baseColor: Colors.grey.shade400,
-                highlightColor: Colors.grey.shade500,
-                child: Container(
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              );
-            },
-          );
-        }
+    return Consumer<AdminProvider>(
+      builder: (context, adminProvider, child) {
+        final products = adminProvider.allItems;
 
-        List<ProductModel> product = snapshot.data!;
+        if (products.isEmpty) {
+          return const Center(child: Text("No products available"));
+        }
 
         return GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: product.length,
+          itemCount: products.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10,
-            childAspectRatio: 0.85,
+            childAspectRatio: 0.80,
             mainAxisSpacing: 10,
           ),
           itemBuilder: (context, index) {
+            final product = products[index];
             return GestureDetector(
               onTap: () {
                 CustomNavigators.goTo(
-                    context, ProductView(productModel: product[index]));
+                  context,
+                  ProductView(productModel: product),
+                );
               },
               child: Hero(
-                tag: product[index].id,
+                tag: product.id,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     gradient: const LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      stops: [
-                        0,
-                        0.6,
-                        0.9,
-                      ],
+                      stops: [0, 0.6, 0.9],
                       colors: [
                         Color(0xff352A4C),
                         Color(0xff534966),
@@ -83,12 +53,13 @@ class ProductGrid extends StatelessWidget {
                       ],
                     ),
                     image: DecorationImage(
-                      image: NetworkImage(product[index].image),
+                      image: NetworkImage(
+                        product.image,
+                      ),
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 10),
+                    padding: const EdgeInsets.all(8.0),
                     child: Consumer<AuthProvider>(
                         builder: (context, value, child) {
                       return Stack(
@@ -97,17 +68,17 @@ class ProductGrid extends StatelessWidget {
                             alignment: Alignment.topRight,
                             child: GestureDetector(
                               onTap: () {
-                                if (value.favID.contains(product[index].id)) {
-                                  value.removeFromFav(product[index]);
+                                if (value.favID.contains(product.id)) {
+                                  value.removeFromFav(product);
                                 } else {
-                                  value.addToFav(product[index]);
+                                  value.addToFav(product);
                                 }
                               },
                               child: Icon(
-                                value.favID.contains(product[index].id)
+                                value.favID.contains(product.id)
                                     ? Icons.favorite
                                     : Icons.favorite_outline_rounded,
-                                color: value.favID.contains(product[index].id)
+                                color: value.favID.contains(product.id)
                                     ? Colors.red
                                     : Colors.grey,
                               ),
@@ -115,29 +86,43 @@ class ProductGrid extends StatelessWidget {
                           ),
                           Align(
                             alignment: Alignment.bottomLeft,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  product[index].title,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                            child: IntrinsicHeight(
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize
+                                        .min, // Adjust height based on content
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        product.title,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "Rs:${product.price}",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Text(
-                                  "Rs:${product[index].price}0",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
+                          )
                         ],
                       );
                     }),
