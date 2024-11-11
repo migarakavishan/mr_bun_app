@@ -32,6 +32,10 @@ class AdminProvider extends ChangeNotifier {
   File? _imageFile;
   File? get imageFile => _imageFile;
 
+  // Loading state to show/hide loading indicator.
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
   CollectionReference products =
       FirebaseFirestore.instance.collection("Products");
 
@@ -46,8 +50,6 @@ class AdminProvider extends ChangeNotifier {
   }
 
   // Adds a product to the Firestore database after validation.
-
-  // This method validates that the image file, product name, description, and price are provided before uploading the image to Firebase Storage and saving the product data to Firestore.
   Future<void> addProduct(BuildContext context) async {
     if (_imageFile != null &&
         _nameController.text.trim().isNotEmpty &&
@@ -97,9 +99,20 @@ class AdminProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Sets loading state.
+  void setLoadingState(bool state, BuildContext context) {
+    // Ensure notifyListeners is called after the current build phase
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _isLoading = state;
+      notifyListeners();
+    });
+  }
+
   // Fetches products based on the selected category.
   // If no category is selected, it fetches all products.
   Future<void> fetchProductsByCategory(BuildContext context) async {
+    setLoadingState(true, context); // Start loading
+
     List<ProductModel> products;
     if (_selectedCategory == null) {
       // Fetch all products if no category selected
@@ -109,14 +122,18 @@ class AdminProvider extends ChangeNotifier {
       products = await ProductController()
           .fetchProductsByCategory(_selectedCategory!, context);
     }
+
     _allItems = products;
+
+    setLoadingState(false, context); // End loading
     notifyListeners();
   }
 
-  // Fetches all products and sets them in the provider's list.
   Future<void> fetchAllProducts(BuildContext context) async {
+    setLoadingState(true, context); // Start loading
     List<ProductModel> allProducts =
         await productController.fetchProducts(context);
     setAllProducts(allProducts);
+    setLoadingState(false, context); // End loading
   }
 }
