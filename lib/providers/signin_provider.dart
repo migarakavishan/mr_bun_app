@@ -1,12 +1,13 @@
 import 'package:bun_app/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:logger/logger.dart';
 
 // SigninProvider class for managing sign-in functionality
 class SigninProvider extends ChangeNotifier {
   AuthController authController = AuthController();
-  
-   // Controllers for handling text input
+
+  // Controllers for handling text input
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _resetEmail = TextEditingController();
@@ -27,6 +28,18 @@ class SigninProvider extends ChangeNotifier {
           password: _passwordController.text,
           context: context);
       if (isSuccess) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return const Center(
+              child: SpinKitThreeBounce(
+                color: Colors.blue,
+                size: 50.0,
+              ),
+            );
+          },
+        );
         clearTextField();
       }
     }

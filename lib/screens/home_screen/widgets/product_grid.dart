@@ -29,6 +29,7 @@ class ProductGrid extends StatelessWidget {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 5,
+                      childAspectRatio: 0.80,
                       mainAxisSpacing: 5),
                   itemBuilder: (context, index) {
                     return Shimmer.fromColors(

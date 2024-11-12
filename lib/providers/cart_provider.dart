@@ -61,7 +61,6 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
-  
   String getQuantity(ProductModel model) {
     int q = 1;
     if (_cartItems.any((element) => element.model.id == model.id)) {
@@ -83,7 +82,6 @@ class CartProvider extends ChangeNotifier {
     }
     return "$total";
   }
-
 
   // Saves the current cart as an order and clears the cart
   Future<void> saveOrders(BuildContext context) async {

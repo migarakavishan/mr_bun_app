@@ -1,6 +1,7 @@
 import 'package:bun_app/utils/demo_data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SlideShowImage extends StatelessWidget {
   const SlideShowImage({
@@ -23,8 +24,7 @@ class SlideShowImage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: ClipRRect(
-                  borderRadius:
-                      BorderRadius.circular(15), // Apply border radius here
+                  borderRadius: BorderRadius.circular(15),
                   child: Image.network(
                     url,
                     fit: BoxFit.cover,
@@ -34,13 +34,11 @@ class SlideShowImage extends StatelessWidget {
                         // Image has finished loading
                         return child;
                       } else {
-                        // Display loading indicator
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                    (loadingProgress.expectedTotalBytes ?? 1)
-                                : null,
+                        // Display Spinkit loading indicator
+                        return const Center(
+                          child: SpinKitFadingCircle(
+                            color: Colors.blue,
+                            size: 50.0,
                           ),
                         );
                       }
