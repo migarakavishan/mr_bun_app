@@ -13,6 +13,8 @@ class CustomDialog {
         ));
   }
 
+  
+
   // Dismisses the loading spinner
   static void dismissLoader() {
     EasyLoading.dismiss();

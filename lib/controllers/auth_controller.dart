@@ -27,6 +27,7 @@ class AuthController {
         Provider.of<auth_provider.AuthProvider>(context, listen: false).setUser(
             user); // this prefix thing was add because that AuthProvider cannt access tha auth_provider class that i create
         Logger().i('User is Signed in!');
+
         fetchUserData(user.uid).then((value) {
           if (value != null) {
             Provider.of<auth_provider.AuthProvider>(context, listen: false)

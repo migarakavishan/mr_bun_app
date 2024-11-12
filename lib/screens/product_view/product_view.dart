@@ -1,5 +1,6 @@
 import 'package:bun_app/model/product_model.dart';
 import 'package:bun_app/providers/cart_provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -70,7 +71,7 @@ class _ProductViewState extends State<ProductView> {
                 height: 350,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(widget.productModel.image))),
+                        image: CachedNetworkImageProvider(widget.productModel.image))),
               ),
             ),
           ),

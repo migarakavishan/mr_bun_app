@@ -1,4 +1,5 @@
 import 'package:bun_app/providers/cart_provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +47,7 @@ class _CartScrrenState extends State<CartScrren> {
                                     borderRadius: BorderRadius.circular(20),
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image: NetworkImage(value
+                                        image: CachedNetworkImageProvider(value
                                             .cartItems[index].model.image))),
                               ),
                             ),

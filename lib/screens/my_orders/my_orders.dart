@@ -1,6 +1,7 @@
 import 'package:bun_app/controllers/order_controller.dart';
 import 'package:bun_app/model/order_model.dart';
 import 'package:bun_app/providers/auth_provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -105,11 +106,12 @@ class _MyOrdersState extends State<MyOrders> {
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                             image: DecorationImage(
-                                                image: NetworkImage(
-                                                    orders[index]
-                                                        .items[i]
-                                                        .model
-                                                        .image),
+                                                image:
+                                                    CachedNetworkImageProvider(
+                                                        orders[index]
+                                                            .items[i]
+                                                            .model
+                                                            .image),
                                                 fit: BoxFit.cover)),
                                       ),
                                       title: Text(

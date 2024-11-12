@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:bun_app/providers/signin_provider.dart';
 import 'package:bun_app/screens/auth_screen/register_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -127,11 +128,28 @@ class _LoginScreenState extends State<LoginScreen> {
                               TextSpan(
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const RegisterScreen()));
+                                      Navigator.of(context).push(
+                                        PageRouteBuilder(
+                                          pageBuilder: (context, animation,
+                                              secondaryAnimation) {
+                                            return const RegisterScreen();
+                                          },
+                                          transitionsBuilder: (context,
+                                              animation,
+                                              secondaryAnimation,
+                                              child) {
+                                            return SharedAxisTransition(
+                                              animation: animation,
+                                              secondaryAnimation:
+                                                  secondaryAnimation,
+                                              transitionType:
+                                                  SharedAxisTransitionType
+                                                      .horizontal,
+                                              child: child,
+                                            );
+                                          },
+                                        ),
+                                      );
                                     },
                                   text: "Sign up",
                                   style: const TextStyle(

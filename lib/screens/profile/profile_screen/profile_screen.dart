@@ -148,7 +148,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                CustomNavigators.goTo(
+                                CustomNavigation2.nextPage2(
                                     context, const FavoriteScreen());
                               },
                               child: const Text("Favorite",
@@ -168,7 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            CustomNavigators.goTo(context, const MyOrders());
+                            CustomNavigation2.nextPage2(context, const MyOrders());
                           },
                           child: const Row(
                             children: [
