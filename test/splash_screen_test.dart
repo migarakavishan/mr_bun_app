@@ -1,3 +1,5 @@
+// splash_screen_test.dart
+
 import 'package:bun_app/providers/auth_provider.dart';
 import 'package:bun_app/providers/profile_provider.dart';
 import 'package:bun_app/providers/signin_provider.dart';
@@ -9,7 +11,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
 import 'test_firebase_platform_file.dart';
-// Add all other necessary providers here
 
 void main() {
   setUpAll(() async {
