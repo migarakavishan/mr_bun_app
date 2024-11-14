@@ -56,6 +56,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               label: 'Cart'),
           BottomNavigationBarItem(
+              key: ValueKey('profile'),
               icon: Icon(
                 Icons.person_2_outlined,
                 color: Colors.black,

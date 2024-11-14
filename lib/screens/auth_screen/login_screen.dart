@@ -62,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         //Email TextField
                         TextField(
+                          key: const ValueKey('emailField'),
                           controller: value.emailController,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
@@ -78,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         //Password TextField
                         TextField(
+                          key: const ValueKey('passwordField'),
                           obscureText: true,
                           controller: value.passwordController,
                           decoration: InputDecoration(
@@ -107,6 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 50,
                         ),
                         ElevatedButton(
+                            key: const ValueKey('signInButton'),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xffB31312)),
                             onPressed: () {

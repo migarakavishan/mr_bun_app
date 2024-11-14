@@ -168,7 +168,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            CustomNavigation2.nextPage2(context, const MyOrders());
+                            CustomNavigation2.nextPage2(
+                                context, const MyOrders());
                           },
                           child: const Row(
                             children: [
@@ -209,6 +210,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 width: 20,
                               ),
                               Text(
+                                key: ValueKey('logout'),
                                 "Logout",
                                 style: TextStyle(
                                     color: Colors.red,

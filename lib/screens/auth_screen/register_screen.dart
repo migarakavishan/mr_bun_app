@@ -38,6 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 20,
                 ),
                 TextField(
+                  key: const ValueKey('registerNameField'),
                   controller: value.nameController,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
@@ -53,6 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 10,
                 ),
                 TextField(
+                  key: const ValueKey('registerEmailField'),
                   controller: value.emailController,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
@@ -68,6 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 10,
                 ),
                 TextField(
+                  key: const ValueKey('registerPasswordField'),
                   obscureText: true,
                   controller: value.passwordController,
                   decoration: InputDecoration(
@@ -84,6 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 10,
                 ),
                 TextField(
+                  key: const ValueKey('registerPasswordField2'),
                   obscureText: true,
                   controller: value.confirmPasswordController,
                   decoration: InputDecoration(
@@ -103,6 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 50,
                 ),
                 ElevatedButton(
+                    key: const ValueKey('registerSubmitButton'),
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xffB31312)),
                     onPressed: () {
