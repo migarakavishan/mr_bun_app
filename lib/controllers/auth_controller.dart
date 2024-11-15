@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 
 /// Controller class for handling user authentication and user data operations.
 class AuthController {
+  
   CollectionReference users = FirebaseFirestore.instance.collection("Users");
 
   // If the user is signed out, navigates to the LoginScreen. If the user is

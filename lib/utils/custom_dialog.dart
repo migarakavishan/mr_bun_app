@@ -13,8 +13,6 @@ class CustomDialog {
         ));
   }
 
-  
-
   // Dismisses the loading spinner
   static void dismissLoader() {
     EasyLoading.dismiss();
@@ -32,6 +30,7 @@ class CustomDialog {
             actions: [
               CupertinoDialogAction(
                 child: const Text(
+                  key: ValueKey('ok'),
                   "ok",
                   style: TextStyle(color: Colors.blue),
                 ),
