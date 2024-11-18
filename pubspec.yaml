@@ -55,6 +55,7 @@ dependencies:
   cloud_firestore_platform_interface: ^6.4.4
   firebase_auth_mocks: ^0.14.1
   test: ^1.25.7
+  convex_bottom_bar: ^3.2.0
 
 dev_dependencies:
   flutter_driver:
