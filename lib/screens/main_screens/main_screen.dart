@@ -2,6 +2,7 @@ import 'package:bun_app/screens/cart/cart_scrren.dart';
 import 'package:bun_app/screens/favorite/favorite_screen.dart';
 import 'package:bun_app/screens/home_screen/home_screen.dart';
 import 'package:bun_app/screens/profile/profile_screen/profile_screen.dart';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const FavoriteScreen(),
     const CartScrren(),
-    const ProfileScreen()
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -34,39 +35,31 @@ class _MainScreenState extends State<MainScreen> {
         index: _selectedIndex,
         children: _pages,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
+      bottomNavigationBar: ConvexAppBar(
+        style: TabStyle.reactCircle, // Animation style
         items: const [
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home_outlined,
-                color: Colors.black,
-              ),
-              label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.favorite_outline,
-                color: Colors.black,
-              ),
-              label: 'Favorite'),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.add_shopping_cart_outlined,
-                color: Colors.black,
-              ),
-              label: 'Cart'),
-          BottomNavigationBarItem(
-              key: ValueKey('profile'),
-              icon: Icon(
-                Icons.person_2_outlined,
-                color: Colors.black,
-              ),
-              label: 'Profile'),
+          TabItem(
+            icon: Icons.home_outlined,
+            title: 'Home',
+          ),
+          TabItem(
+            icon: Icons.favorite_outline,
+            title: 'Favorite',
+          ),
+          TabItem(
+            icon: Icons.add_shopping_cart_outlined,
+            title: 'Cart',
+          ),
+          TabItem(
+            icon: Icons.person_2_outlined,
+            title: 'Profile',
+          ),
         ],
-        currentIndex: _selectedIndex,
+        initialActiveIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.white,
+        activeColor: const Color(0xff352A4C), // Color of the active icon
+        color: Colors.black, // Color of the inactive icons
       ),
     );
   }
